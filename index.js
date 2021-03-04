@@ -101,22 +101,6 @@ class Player extends Deck {
 }
 */
 
-//my first map(noun) data structure
-let vegasDeck = {
-  Two: 2,
-  Three: 3,
-  Four: 4,
-  Five: 5,
-  Six: 6,
-  Seven: 7,
-  Eight: 8,
-  Nine: 9,
-  Ten: 10,
-  Jack: 11,
-  Queen: 12,
-  King: 13,
-  Ace: 14,
-};
 ////Deck of Cards
 class Deck {
   constructor() {
@@ -137,7 +121,7 @@ class Deck {
       `Ace of `,
     ];
     this.newDeck = [];
-    this.arrowShuffle = arrowShuffle = (array) => shuffle(array);
+    this.playDeck;
   }
   makeAdeck() {
     for (let i = 0; i < this.suits.length; i++) {
@@ -145,6 +129,24 @@ class Deck {
         this.newDeck.push(this.ranks[j] + this.suits[i]);
       }
     }
+  }
+  shuffle(array) {
+    var m = array.length,
+      t,
+      i;
+
+    // While there remain elements to shuffle…
+    while (m) {
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+
+    return (this.playDeck = array);
   }
 }
 
@@ -218,4 +220,12 @@ class Menu {
 }
 
 let startThis = new Menu();
-startThis.startApp();
+// startThis.startApp();
+let vegasDeck = new Deck();
+vegasDeck.makeAdeck();
+console.log(vegasDeck.newDeck); //makes a new deck, called newDeck
+vegasDeck.shuffle(vegasDeck.newDeck);
+console.log(vegasDeck.newDeck);
+vegasDeck.shuffle(vegasDeck.newDeck);
+console.log(vegasDeck.newDeck);
+console.log(vegasDeck.playDeck);
