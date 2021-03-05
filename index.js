@@ -108,28 +108,29 @@ class Card {
     this.value = value;
   }
   describe() {
-    console.log(`${this.suit} of ${this.rank}`);
+    console.log(`${this.rank} of ${this.suit}`);
   }
 }
 
 ////Deck of Cards
-class Deck {
+class Deck extends Card {
   constructor() {
+    super();
     this.suits = [`Hearts`, `Diamonds`, `Spades`, `Clubs`];
     this.ranks = [
-      `2 of `,
-      `3 of `,
-      `4 of `,
-      `5 of `,
-      `6 of `,
-      `7 of `,
-      `8 of `,
-      `9 of `,
-      `10 of `,
-      `Jack of `,
-      `Queen of `,
-      `King of `,
-      `Ace of `,
+      `2`,
+      `3`,
+      `4`,
+      `5`,
+      `6`,
+      `7`,
+      `8`,
+      `9`,
+      `10`,
+      `Jack`,
+      `Queen`,
+      `King`,
+      `Ace`,
     ];
     this.value = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
     this.newDeck = [];
