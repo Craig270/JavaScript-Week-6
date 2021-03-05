@@ -101,6 +101,17 @@ class Player extends Deck {
 }
 */
 
+class Card {
+  constructor(suit, rank, value) {
+    this.rank = rank;
+    this.suit = suit;
+    this.value = value;
+  }
+  describe() {
+    console.log(`${this.suit} of ${this.rank}`);
+  }
+}
+
 ////Deck of Cards
 class Deck {
   constructor() {
@@ -120,13 +131,16 @@ class Deck {
       `King of `,
       `Ace of `,
     ];
+    this.value = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
     this.newDeck = [];
     this.playDeck;
   }
   makeAdeck() {
     for (let i = 0; i < this.suits.length; i++) {
       for (let j = 0; j < this.ranks.length; j++) {
-        this.newDeck.push(this.ranks[j] + this.suits[i]);
+        this.newDeck.push(
+          new Card(this.suits[i], this.ranks[j], this.value[j])
+        );
       }
     }
   }
@@ -229,3 +243,4 @@ console.log(vegasDeck.newDeck);
 vegasDeck.shuffle(vegasDeck.newDeck);
 console.log(vegasDeck.newDeck);
 console.log(vegasDeck.playDeck);
+console.log(vegasDeck.playDeck[1][0]);
