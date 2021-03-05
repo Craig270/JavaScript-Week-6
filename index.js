@@ -1,105 +1,4 @@
 "use strict";
-/*
-let ranks = [
-  ["Two", 2], //0
-  ["Three", 3], //1
-  ["Four", 4], //2
-  ["Five", 5], //3
-  ["Six", 6], //4
-  ["Seven", 7], //5
-  ["Eight", 8], //6
-  ["Nine", 9], //7
-  ["Ten", 10], //8
-  ["Jack", 11], //9
-  ["Queen", 12], //10
-  ["King", 13], //11
-  ["Ace", 14], //12
-];
-//Fisher–Yates shuffle (found this from doing research)
-function shuffle(array) {
-  var m = array.length,
-    t,
-    i;
-
-  // While there remain elements to shuffle…
-  while (m) {
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
-
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
-}
-
-console.log(shuffle(ranks));
-let arrowShuffle = (array) => shuffle(array);
-console.log(arrowShuffle(ranks));
-class Card {
-  constructor(value) {
-    this.value = value;
-  }
-  describe() {
-    console.log(`This card is a number ${this.number}.`);
-  }
-}
-
-class Deck {
-  constructor() {
-    this.sealedDeck = [
-      ["Two", 2], //0
-      ["Three", 3], //1
-      ["Four", 4], //2
-      ["Five", 5], //3
-      ["Six", 6], //4
-      ["Seven", 7], //5
-      ["Eight", 8], //6
-      ["Nine", 9], //7
-      ["Ten", 10], //8
-      ["Jack", 11], //9
-      ["Queen", 12], //10
-      ["King", 13], //11
-      ["Ace", 14], //12
-    ];
-    this.playDeck = [];
-    this.arrowShuffle = arrowShuffle = (array) => shuffle(array);
-  }
-
-  shuffle(array) {
-    var m = array.length,
-      t,
-      i;
-
-    // While there remain elements to shuffle…
-    while (m) {
-      // Pick a remaining element…
-      i = Math.floor(Math.random() * m--);
-
-      // And swap it with the current element.
-      t = array[m];
-      array[m] = array[i];
-      array[i] = t;
-    }
-
-    return (this.playDeck = array);
-  }
-
-  deal() {
-    //deal the cards to players
-  }
-}
-
-class Player extends Deck {
-  constructor(name) {
-    this.name = name;
-    this.hand = []; //empty array for players current held cards
-    //properties of player
-  }
-}
-*/
 
 class Card {
   constructor(suit, rank, value) {
@@ -166,17 +65,19 @@ class Deck extends Card {
 }
 
 //Player Class
-class Player {
+class Player extends Deck {
   constructor(name) {
+    super();
     this.name = name;
     this.hand = []; //eq1mpty array for players current held cards
     //properties of player
   }
 }
 
-class Menu {
+class Menu extends Player {
   constructor() {
     //Menu Constructor
+    super();
     this.player1Picked = " ";
     this.player2Picked = " ";
   }
@@ -199,16 +100,19 @@ class Menu {
       }
       selection = this.showMainMenu();
     }
-    alert(`Thank you for visiting this virtual War-Card Game simulator`);
+    alert(`Thank you for visiting this virtual War-Card Game simulator
+    
+    If you would like to play again simply refresh this page.`);
   }
 
   showMainMenu() {
     return prompt(`
   ---Welcome to this Virtual War-Card Game Simulator---
+            -Current Players:  P1:${this.player1Picked.name} | P2: ${this.player2Picked.name}
     0) Exit
     1) Add Players for a new Game
-    2) Start War-Card Game
-    3) Alert Player1 and Player2 Names. 
+    2) Deal Cards and Start the War Simulator!
+    3) Alert Player1 and Player2 Names.
     `);
   }
 
@@ -227,21 +131,12 @@ class Menu {
     let player2 = prompt(`Enter the name for Player2: `);
     this.player1Picked = new Player(player1);
     this.player2Picked = new Player(player2);
-    return this.startWar();
+    return this.showMainMenu();
   }
   startWar() {
-    alert(`The start war function has been called`);
+    console.log(`The start war function has been called`);
   }
 }
 
 let startThis = new Menu();
-// startThis.startApp();
-let vegasDeck = new Deck();
-vegasDeck.makeAdeck();
-console.log(vegasDeck.newDeck); //makes a new deck, called newDeck
-vegasDeck.shuffle(vegasDeck.newDeck);
-console.log(vegasDeck.newDeck);
-vegasDeck.shuffle(vegasDeck.newDeck);
-console.log(vegasDeck.newDeck);
-console.log(vegasDeck.playDeck);
-console.log(vegasDeck.playDeck[1][0]);
+startThis.startApp();
