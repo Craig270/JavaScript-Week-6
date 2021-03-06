@@ -95,6 +95,7 @@ class Menu extends Player {
           this.startWar();
           return;
         default:
+          alert(`You need to enter 0-2`);
           selection = 0;
       }
       selection = this.showMainMenu();
