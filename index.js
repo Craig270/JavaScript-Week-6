@@ -80,6 +80,8 @@ class Menu extends Player {
     super();
     this.player1Picked = " ";
     this.player2Picked = " ";
+    this.player1Score = 0;
+    this.player2Score = 0;
   }
 
   startApp() {
@@ -91,6 +93,7 @@ class Menu extends Player {
           break;
         case "2":
           this.startWar();
+          break;
           break;
         case "3":
           this.alertPlayers();
@@ -134,7 +137,62 @@ class Menu extends Player {
     return this.showMainMenu();
   }
   startWar() {
-    console.log(`The start war function has been called`);
+    alert(
+      `Make sure you open your console in browser to see the Game! Also you may need to type 0 on the main menu to close the alert window.`
+    );
+    //Makes a new deck of cards and shuffles them
+    let startWarDeck1 = new Deck();
+    startWarDeck1.makeAdeck();
+    startWarDeck1.shuffle(startWarDeck1.newDeck);
+    // For loop for dealing out the card to each player's hand
+    for (let i = 0; i < startWarDeck1.newDeck.length; i++) {
+      if (i % 2 == 0) {
+        this.player1Picked.hand.push(startWarDeck1.newDeck[i]);
+      } else {
+        this.player2Picked.hand.push(startWarDeck1.newDeck[i]);
+      }
+    }
+    //For loop for the comparison between card values. 2 lowest 14 highest
+    for (let i = 0; i < this.player1Picked.hand.length; i++) {
+      if (this.player1Picked.hand[i].value > this.player2Picked.hand[i].value) {
+        this.player1Score += 1;
+        console.log(
+          `${this.player1Picked.name} played ${this.player1Picked.hand[i].rank} of ${this.player1Picked.hand[i].suit} beating out ${this.player2Picked.hand[i].rank} of ${this.player2Picked.hand[i].suit} played by ${this.player2Picked.name}!`
+        );
+      } else if (
+        this.player1Picked.hand[i].value < this.player2Picked.hand[i].value
+      ) {
+        this.player2Score += 1;
+        console.log(
+          `${this.player2Picked.name} played ${this.player2Picked.hand[i].rank} of ${this.player2Picked.hand[i].suit} beating out ${this.player1Picked.hand[i].rank} of ${this.player1Picked.hand[i].suit} played by ${this.player1Picked.name}`
+        );
+      } else if (
+        this.player1Picked.hand[i].value == this.player2Picked.hand[i].value
+      ) {
+        console.log(`This battle of war was a tie! No player got a point!`);
+      }
+    }
+    console.log(`
+    --------------
+    The Score:
+    --------------
+    ${this.player1Picked.name}:${this.player1Score}
+    ${this.player2Picked.name}:${this.player2Score}
+    `);
+    if (this.player1Score > this.player2Score) {
+      console.log(
+        `Congratulations!! ${this.player1Picked.name} you are the winner of this War Card Game simuilated game!!`
+      );
+    }
+    if (this.player2Score > this.player1Score) {
+      console.log(
+        `Congratulations!! ${this.player2Picked.name} you are the winner of this War Card Game simuilated game!!`
+      );
+    } else if (this.player1Score === this.player2Score) {
+      console.log(
+        `As luck would have it this game was a tie and no one is the winner!`
+      );
+    }
   }
 }
 
